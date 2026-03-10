@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FacebookSignupPage extends CommonLib{
     public FacebookSignupPage(WebDriver driver) {
@@ -21,24 +23,32 @@ public class FacebookSignupPage extends CommonLib{
     private WebElement lastNameField;
 
     @FindBy(id = "_r_9_")
-    private WebElement month;
+    private WebElement monthSection;
 
     @FindBy(xpath = "//*[text()='Create new account']")
     private WebElement createNewAccount;
+
+    @FindBy(css = "#_r_a_ div")
+    private List<WebElement> monthsList;
 
     public void clickSignUP() throws IOException {
         createNewAccount.click();
     }
 
     public void enterFirstName(String firstName) {
+
         firstNameField.sendKeys(firstName);
     }
 
     public void enterLastNAme(String lastName) {
+
         lastNameField.sendKeys(lastName);
     }
-
-    public void enterMobileNumber(String months) throws IOException {
-        month.sendKeys(months);
+    public void getDropdownOptions(String month) {
+        List<String> options = new ArrayList<>();
+        for (WebElement option : monthsList) {
+            options.add(String.valueOf(option.getText().equals(month)));
+        }
     }
+
 }

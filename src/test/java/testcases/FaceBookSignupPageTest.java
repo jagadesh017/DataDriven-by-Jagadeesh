@@ -15,7 +15,7 @@ import java.io.IOException;
 public class FaceBookSignupPageTest extends DriverInstance {
 
     @Test
-    public void FacebookLoginPageTest() throws InterruptedException {
+    public void FacebookLoginPageTest() throws InterruptedException, IOException {
         Reporter.log("FacebookLoginPageTest");
         Reporter.log("1. Open Facebook login page | Login page should be displayed");
         Reporter.log("2. Enter valid username and password | User should be able to login successfully");
@@ -23,6 +23,12 @@ public class FaceBookSignupPageTest extends DriverInstance {
 
         Reporter.log("Actual Result");
         Reporter.log("----------------------------");
+
+        FacebookSignupPage signup = new FacebookSignupPage(driver);
+        signup.clickSignUP();
+        signup.enterFirstName("test");
+        signup.enterLastNAme("user");
+        signup.getDropdownOptions("Jan");
 
 
     }
