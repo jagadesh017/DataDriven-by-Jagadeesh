@@ -28,7 +28,7 @@ public class FaceBookSignupPageTest extends DriverInstance {
         signup.clickSignUP();
         signup.enterFirstName("test");
         signup.enterLastNAme("user");
-        signup.getDropdownOptions("Jan");
+        signup.getDropdownOptions("May");
 
 
     }
