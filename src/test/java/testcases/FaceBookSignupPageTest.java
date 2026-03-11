@@ -2,6 +2,8 @@ package testcases;
 
 import base.DriverInstance;
 import listeners.WebDriverEvent;
+import org.apache.regexp.REProgram;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.testng.Reporter;
@@ -15,27 +17,26 @@ import java.io.IOException;
 public class FaceBookSignupPageTest extends DriverInstance {
 
     @Test
-    public void FacebookLoginPageTest() throws InterruptedException, IOException {
+    public void FacebookSinUpPageTest() throws InterruptedException, IOException {
         Reporter.log("FacebookLoginPageTest");
         Reporter.log("1. Open Facebook login page | Login page should be displayed");
-        Reporter.log("2. Enter valid username and password | User should be able to login successfully");
-
+        Reporter.log("2. Click on sign up button | Sign up form should be displayed");
+        Reporter.log("2. Enter First name and last name | First name and last name should be entered");
+        Reporter.log("3. enter date of birth | date of birth should be entered");
 
         Reporter.log("Actual Result");
         Reporter.log("----------------------------");
-
-        FacebookSignupPage signup = new FacebookSignupPage(driver);
-        signup.clickSignUP();
-        signup.enterFirstName("test");
-        signup.enterLastNAme("user");
-        signup.getDropdownOptions("May");
-
+        FacebookSignupPage signupPage = new FacebookSignupPage(driver);
+        signupPage.clickSignUP();
+        signupPage.enterFirstName("John");
+        signupPage.enterLastNAme("Doe");
+         signupPage.getDropdownOptions("Mar");
 
     }
 
 
-    @Test(dataProvider = "Register", dataProviderClass = DataGenerators.class)
-    public void test_signup_newUser() throws IOException {
+    @Test
+    public void testVerifyMetaTag() throws IOException {
 
         Reporter.log("Testcase  Description | expected results");
         Reporter.log("===============================");
@@ -47,9 +48,10 @@ public class FaceBookSignupPageTest extends DriverInstance {
 
         Reporter.log("Actual results");
         Reporter.log("--------------------");
-
-        FacebookSignupPage signup = new FacebookSignupPage(driver);
-        signup.clickSignUP();
+        FacebookSignupPage signupPage = new FacebookSignupPage(driver);
+        signupPage.clickSignUP();
+        signupPage.verifyMetaTag();
+        signupPage.getMetaText();
     }
 
     @Test(dataProvider = "Register", dataProviderClass = DataGenerators.class)
@@ -67,9 +69,9 @@ public class FaceBookSignupPageTest extends DriverInstance {
 
     public void callingListener(String url) {
 
-        EventFiringWebDriver eventDriver= new EventFiringWebDriver(driver);
+        EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
 
-        WebDriverEvent listener= new WebDriverEvent();
+        WebDriverEvent listener = new WebDriverEvent();
         eventDriver.register(listener);
         eventDriver.navigate().to(url);
     }

@@ -26,8 +26,6 @@ public class FacebookLoginPage extends CommonLib{
     @FindBy(css = "div[aria-label='Log in']")
     private WebElement loginCTA;
 
-
-
     //action methods
 
     public void enterUsername(String username)  {
