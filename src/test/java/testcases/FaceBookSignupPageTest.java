@@ -2,13 +2,10 @@ package testcases;
 
 import base.DriverInstance;
 import listeners.WebDriverEvent;
-import org.apache.regexp.REProgram;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.events.WebDriverEventListener;
+
 import org.testng.Reporter;
 import org.testng.annotations.Test;
-import pages.FacebookLoginPage;
 import pages.FacebookSignupPage;
 import testdatagenerators.DataGenerators;
 
@@ -21,8 +18,8 @@ public class FaceBookSignupPageTest extends DriverInstance {
         Reporter.log("FacebookLoginPageTest");
         Reporter.log("1. Open Facebook login page | Login page should be displayed");
         Reporter.log("2. Click on sign up button | Sign up form should be displayed");
-        Reporter.log("2. Enter First name and last name | First name and last name should be entered");
-        Reporter.log("3. enter date of birth | date of birth should be entered");
+        Reporter.log("3. Enter First name and last name | First name and last name should be entered");
+        Reporter.log("4. enter date of birth | date of birth should be entered");
 
         Reporter.log("Actual Result");
         Reporter.log("----------------------------");
@@ -30,7 +27,7 @@ public class FaceBookSignupPageTest extends DriverInstance {
         signupPage.clickSignUP();
         signupPage.enterFirstName("John");
         signupPage.enterLastNAme("Doe");
-         signupPage.getDropdownOptions("Mar");
+        signupPage.getDropdownOptions("Mar");
 
     }
 
@@ -44,7 +41,6 @@ public class FaceBookSignupPageTest extends DriverInstance {
         Reporter.log("2. Verify url | URl should be displayed");
         Reporter.log("3. Click on create new account | Sign up form should be displayed");
         Reporter.log("4. Enter user details and click on sign up | user should be registered successfully");
-
 
         Reporter.log("Actual results");
         Reporter.log("--------------------");

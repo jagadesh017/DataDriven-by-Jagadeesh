@@ -38,7 +38,6 @@ public class DataGenerators {
 
         }
         return testData;
-
     }
 
     @DataProvider(name = "Register")
@@ -55,8 +54,9 @@ public class DataGenerators {
             XSSFCell firstName = row.getCell(0);
             XSSFCell lastName = row.getCell(1);
             XSSFCell phoneNum = row.getCell(1);
-            testData[i][0] = lastName.getStringCellValue();
-            testData[i][1] = phoneNum.getStringCellValue();
+
+            testData[i][0] = firstName.getStringCellValue();
+            testData[i][1] = lastName.getStringCellValue();
             testData[i][2] = phoneNum.getStringCellValue();
         }
         return testData;
@@ -98,8 +98,8 @@ public class DataGenerators {
                 XSSFCell firstName = row.getCell(0);
                 XSSFCell lastName = row.getCell(1);
                 XSSFCell phoneNum = row.getCell(1);
-                testData[i][0] = lastName.getStringCellValue();
-                testData[i][1] = phoneNum.getStringCellValue();
+                testData[i][0] = firstName.getStringCellValue();
+                testData[i][1] = lastName.getStringCellValue();
                 testData[i][2] = phoneNum.getStringCellValue();
             }
             return testData;

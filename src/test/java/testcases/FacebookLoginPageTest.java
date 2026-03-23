@@ -9,7 +9,7 @@ import pages.FacebookLoginPage;
 public class FacebookLoginPageTest extends DriverInstance {
 
     @Test
-    public void FacebookLoginPageTest() throws InterruptedException {
+    public void testFacebookLoginPageTest() throws InterruptedException {
         Reporter.log("FacebookLoginPageTest");
         Reporter.log("1. Open Facebook login page | Login page should be displayed");
         Reporter.log("2. Enter valid username and password | User should be able to login successfully");

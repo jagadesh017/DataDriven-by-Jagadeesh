@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 
-import java.util.EventObject;
-
 public class WebDriverEvent implements WebDriverEventListener {
     @Override
     public void beforeAlertAccept(WebDriver driver) {

@@ -2,7 +2,6 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import java.time.Duration;
 
 public class CommonLib {
     WebDriver driver;
@@ -158,7 +156,7 @@ public class CommonLib {
     public boolean mouseOverWithDelay(WebElement element, long delayMilliseconds) {
         try {
             Actions actions = new Actions(driver);
-            actions.moveToElement(element).pause(delayMilliseconds).perform();
+            actions.moveToElement(element).perform();
             return true;
         } catch (Exception e) {
             System.out.println("Error performing mouse over with delay: " + e.getMessage());
