@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 import pages.BasicCL;
 import pages.FacebookSignupPage;
-import pages.HomePage;
 import testdatagenerators.DataGenerators;
 
 import java.io.IOException;
@@ -80,10 +79,6 @@ public class FaceBookSignupPageTest extends DriverInstance {
         //b.selectDropdownValueslist();
         //b.printHoverMenuValues();
         //b.priceOfTheCourse();
-    //b.citiesAndTheirSum();
-
-    HomePage homePage = new HomePage(driver);
-    homePage.webTableAgeCalculation();
-    homePage.printAllOfficeNames();
+         b.citiesAndTheirSum();
     }
 }
