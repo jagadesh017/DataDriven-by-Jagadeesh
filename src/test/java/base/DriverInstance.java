@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utility.Utilities;
 
@@ -32,13 +33,15 @@ public class DriverInstance {
             driver = new InternetExplorerDriver();
 
         }
-            driver.get("https://www.facebook.com");
-            driver.manage().window().maximize();
+          //  driver.get("https://www.facebook.com");
+        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        driver.get("https://datatables.net/");
+        driver.manage().window().maximize();
 
 
     }
 
-  //  @AfterMethod
+  @AfterMethod
     public void tearDown() {
         driver.quit();
         }

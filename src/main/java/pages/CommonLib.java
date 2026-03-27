@@ -23,6 +23,9 @@ public class CommonLib {
         PageFactory.initElements(driver, this);
     }
 
+    public CommonLib() {
+    }
+
     public boolean verifyPageUrl(String expectedUrl) {
         String currentUrl = driver.getCurrentUrl();
         return currentUrl.equals(expectedUrl);

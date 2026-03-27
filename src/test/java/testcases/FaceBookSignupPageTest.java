@@ -6,7 +6,10 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import org.testng.Reporter;
 import org.testng.annotations.Test;
+
+import pages.BasicCL;
 import pages.FacebookSignupPage;
+import pages.HomePage;
 import testdatagenerators.DataGenerators;
 
 import java.io.IOException;
@@ -30,8 +33,7 @@ public class FaceBookSignupPageTest extends DriverInstance {
         signupPage.getDropdownOptions("Mar");
 
     }
-
-
+    
     @Test
     public void testVerifyMetaTag() throws IOException {
 
@@ -70,5 +72,18 @@ public class FaceBookSignupPageTest extends DriverInstance {
         WebDriverEvent listener = new WebDriverEvent();
         eventDriver.register(listener);
         eventDriver.navigate().to(url);
+    }
+@Test
+    public void testDropdownValues(){
+
+        BasicCL b = new BasicCL(driver);
+        //b.selectDropdownValueslist();
+        //b.printHoverMenuValues();
+        //b.priceOfTheCourse();
+    //b.citiesAndTheirSum();
+
+    HomePage homePage = new HomePage(driver);
+    homePage.webTableAgeCalculation();
+    homePage.printAllOfficeNames();
     }
 }
