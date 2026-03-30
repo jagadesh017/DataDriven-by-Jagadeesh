@@ -79,6 +79,11 @@ public class FaceBookSignupPageTest extends DriverInstance {
         //b.selectDropdownValueslist();
         //b.printHoverMenuValues();
         //b.priceOfTheCourse();
-         b.citiesAndTheirSum();
+        // b.citiesAndTheirSum();
+         //b.getAlertMessage();
+         //b.switchWindowFromParentToChild();
+         //b.autoSuggestionCapture();
+        // b.iframe();
+         b.checkDoller();
     }
 }

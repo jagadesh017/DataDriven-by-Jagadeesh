@@ -34,8 +34,8 @@ public class DriverInstance {
 
         }
           //  driver.get("https://www.facebook.com");
-        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-        driver.get("https://datatables.net/");
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        //driver.get("https://datatables.net/");
         driver.manage().window().maximize();
 
 

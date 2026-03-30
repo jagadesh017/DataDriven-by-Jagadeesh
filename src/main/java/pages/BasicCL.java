@@ -1,15 +1,17 @@
 package pages;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
  public class BasicCL extends CommonLib {
      WebDriver driver;
@@ -90,14 +92,14 @@ import org.openqa.selenium.support.ui.Select;
      public BasicCL priceOfTheCourse() {
          try {
              for (int i = 2; i <= courseTableRowsCount.size(); i++) {
-                for( int j = 1; j <= courseTableColumnCount.size(); j++) {
-                    String courseName = driver.findElement(By.xpath("//table[@name='courses']//tr["+i+"]//td[2]")).getText();
-                    String coursePrice = driver.findElement(By.xpath("//table[@name='courses']//tr["+i+"]//td[3]")).getText();
+                 for (int j = 1; j <= courseTableColumnCount.size(); j++) {
+                     String courseName = driver.findElement(By.xpath("//table[@name='courses']//tr[" + i + "]//td[2]")).getText();
+                     String coursePrice = driver.findElement(By.xpath("//table[@name='courses']//tr[" + i + "]//td[3]")).getText();
 
-                    if (courseName.contains("Selenium Automation")) {
-                        System.out.println("✅ Found! Course: " + courseName + " | Price: " + coursePrice);
-                        break;
-                }
+                     if (courseName.contains("Selenium Automation")) {
+                         System.out.println("✅ Found! Course: " + courseName + " | Price: " + coursePrice);
+                         break;
+                     }
 
                  }
              }
@@ -116,15 +118,110 @@ import org.openqa.selenium.support.ui.Select;
          try {
              int sum = 0;
              for (int i = 1; i < productTableRowsCount.size(); i++) {
-                 String amount = driver.findElement(By.xpath("//table[@id='product' and not(@name='courses')]//tr["+i+"]//td[4]")).getText();
-                    sum += Integer.parseInt(amount);
+                 String amount = driver.findElement(By.xpath("//table[@id='product' and not(@name='courses')]//tr[" + i + "]//td[4]")).getText();
+                 sum += Integer.parseInt(amount);
              }
              System.out.println("the total sum is " + sum);
          } catch (Exception e) {
-                 throw new RuntimeException(e);
+             throw new RuntimeException(e);
          }
          return this;
      }
 
+     //alerts
+     @FindBy(id = "confirmbtn")
+     private WebElement alertConfirmCTA;
+
+     public BasicCL getAlertMessage() {
+         try {
+             alertConfirmCTA.click();
+             WebDriverWait wait = new WebDriverWait(driver, 10);
+
+             wait.until(ExpectedConditions.alertIsPresent());
+             Alert a = driver.switchTo().alert();
+             String text = a.getText();
+             System.out.println("the alert message is " + text);
+
+         } catch (Exception e) {
+             Assert.fail("failed to get allert message");
+         }
+         return this;
+     }
+    @FindBy(css = "#openwindow")
+    private WebElement openWindow;
+     public BasicCL switchWindowFromParentToChild() {
+         try {
+             openWindow.click();
+             Set<String>windows=driver.getWindowHandles();
+                for(String window:windows) {
+                    driver.switchTo().window(window);
+                }
+                String childWindowTitle = driver.getTitle();
+                System.out.println("the child window title is " + childWindowTitle);
+                driver.switchTo().parentFrame();
+                String parentWindowTitle = driver.getTitle();
+                System.out.println("the parent window title is " + parentWindowTitle);
+
+         } catch (Exception e) {
+             Assert.fail("failed to switch window");
+         }
+         return this;
+     }
+     @FindBy(css = "input#autocomplete")
+     private WebElement autocomplete;
+
+     @FindBy(css = "li.ui-menu-item")
+     private List<WebElement> menuitem;
+
+     public BasicCL autoSuggestionCapture() {
+         try {
+            autocomplete.sendKeys("ind");
+            Thread.sleep(2000);
+            WebDriverWait wait = new WebDriverWait(driver, 10);
+            wait.until(ExpectedConditions.visibilityOfAllElements(menuitem));
+            for (WebElement element : menuitem) {
+                System.out.println("the auto suggestion values are " + element.getText());
+                if(element.getText().equalsIgnoreCase("india")) {
+                    element.click();
+                    Thread.sleep(2000);
+                    break;
+                }
+            }
+
+         } catch (Exception e) {
+             Assert.fail("failed to capture auto suggestion");
+         }
+         return this;
+     }
+        @FindBy(xpath = "//a[text()='VIEW ALL COURSES']")
+        private WebElement allCoursesText;
+     public BasicCL iframe() {
+         try {
+             driver.switchTo().frame(driver.findElement(By.id("courses-iframe")));
+             Thread.sleep(2000);
+             WebDriverWait wait = new WebDriverWait(driver, 10);
+             wait.until(ExpectedConditions.visibilityOf(allCoursesText));
+             System.out.println("the text in iframe is: " + allCoursesText.getText());
+              //driver.switchTo().defaultContent();
+         }catch (Exception e) {
+             Assert.fail("failed to capture iframe");
+         }
+    return this;
+     }
+     @FindBy(css = "span.onoffswitch4-inner")
+     private WebElement dollerSymbol;
+     public BasicCL checkDoller() {
+         try {
+             iframe();
+             Thread.sleep(2000);
+            dollerSymbol.click();
+             WebDriverWait wait = new WebDriverWait(driver, 10);
+                wait.until(ExpectedConditions.visibilityOf(dollerSymbol));
+                System.out.println("the text in iframe is: " + dollerSymbol.getText());
+         }catch (Exception e) {
+             Assert.fail("failed to capture iframe");
+         }
+         return this;
+     }
 
  }
