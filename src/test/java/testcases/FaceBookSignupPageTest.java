@@ -84,6 +84,13 @@ public class FaceBookSignupPageTest extends DriverInstance {
          //b.switchWindowFromParentToChild();
          //b.autoSuggestionCapture();
         // b.iframe();
-         b.checkDoller();
+         //b.checkDoller();
+        //b.openNewTab();
+        // b.getRohitScoreFromTheTable();
+        //b.checkRohitScoreFromTheTable();
+    b.getTable();
     }
-}
+
+
+    }
+

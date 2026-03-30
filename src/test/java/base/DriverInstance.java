@@ -33,9 +33,11 @@ public class DriverInstance {
             driver = new InternetExplorerDriver();
 
         }
-          //  driver.get("https://www.facebook.com");
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        //driver.get("https://www.facebook.com");
+        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         //driver.get("https://datatables.net/");
+        //driver.get("https://crex.com/");
+        driver.get("https://crex.com/series/indian-premier-league-2026-1PW/points-table");
         driver.manage().window().maximize();
 
 
