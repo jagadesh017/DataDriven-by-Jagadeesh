@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import utility.Utilities;
 
@@ -22,7 +21,7 @@ public class DriverInstance {
                 WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
             }else {
-            System.setProperty("webdriver.chrome.driver", "/Users/jagadeesh/JagadeeshAuto/DataDriven/Maven/Drivers/chromedriver");
+            System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver147.exe");
                 driver = new ChromeDriver();
             }
         } else
@@ -43,7 +42,7 @@ public class DriverInstance {
 
     }
 
-  @AfterMethod
+ // @AfterMethod
     public void tearDown() {
         driver.quit();
         }

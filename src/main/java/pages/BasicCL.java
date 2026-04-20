@@ -4,9 +4,6 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.bson.BSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -14,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
  public class BasicCL extends CommonLib {
      WebDriver driver;
@@ -137,7 +135,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
      public BasicCL getAlertMessage() {
          try {
              alertConfirmCTA.click();
-             WebDriverWait wait = new WebDriverWait(driver, 10);
+             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
              wait.until(ExpectedConditions.alertIsPresent());
              Alert a = driver.switchTo().alert();
@@ -153,17 +151,20 @@ import org.openqa.selenium.support.ui.WebDriverWait;
     private WebElement openWindow;
      public BasicCL switchWindowFromParentToChild() {
          try {
+             String parentHandle = driver.getWindowHandle();
              openWindow.click();
-             Set<String>windows=driver.getWindowHandles();
-                for(String window:windows) {
-                    driver.switchTo().window(window);
-                }
-                String childWindowTitle = driver.getTitle();
-                System.out.println("the child window title is " + childWindowTitle);
-                driver.switchTo().parentFrame();
-                String parentWindowTitle = driver.getTitle();
-                System.out.println("the parent window title is " + parentWindowTitle);
-
+             Set<String> windows = driver.getWindowHandles();
+             for (String window : windows) {
+                 if (!window.equals(parentHandle)) {
+                     driver.switchTo().window(window);
+                     String childWindowTitle = driver.getTitle();
+                     System.out.println("the child window title is " + childWindowTitle);
+                     driver.switchTo().window(parentHandle);
+                     String parentWindowTitle = driver.getTitle();
+                     System.out.println("the parent window title is " + parentWindowTitle);
+                     break;
+                 }
+             }
          } catch (Exception e) {
              Assert.fail("failed to switch window");
          }
@@ -179,7 +180,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
          try {
             autocomplete.sendKeys("ind");
             Thread.sleep(2000);
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.visibilityOfAllElements(menuitem));
             for (WebElement element : menuitem) {
                 System.out.println("the auto suggestion values are " + element.getText());
@@ -201,10 +202,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
          try {
              driver.switchTo().frame(driver.findElement(By.id("courses-iframe")));
              Thread.sleep(2000);
-             WebDriverWait wait = new WebDriverWait(driver, 10);
+             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
              wait.until(ExpectedConditions.visibilityOf(allCoursesText));
              System.out.println("the text in iframe is: " + allCoursesText.getText());
-              //driver.switchTo().defaultContent();
+             driver.switchTo().defaultContent();
          }catch (Exception e) {
              Assert.fail("failed to capture iframe");
          }
@@ -215,11 +216,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
      public BasicCL checkDoller() {
          try {
              iframe();
+             driver.switchTo().frame(driver.findElement(By.id("courses-iframe")));
              Thread.sleep(2000);
             dollerSymbol.click();
-             WebDriverWait wait = new WebDriverWait(driver, 10);
+             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 wait.until(ExpectedConditions.visibilityOf(dollerSymbol));
                 System.out.println("the text in iframe is: " + dollerSymbol.getText());
+                driver.switchTo().defaultContent();
          }catch (Exception e) {
              Assert.fail("failed to capture iframe");
          }

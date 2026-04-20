@@ -1,22 +1,21 @@
 package pages;
 
-import org.junit.Assert;
+import org.testng.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FacebookSignupPage extends CommonLib {
     public FacebookSignupPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
-
     // locators
-
     @FindBy(css = "#_R_1cl2p4jikacppb6amH1_")
     private WebElement firstNameField;
 
@@ -35,7 +34,7 @@ public class FacebookSignupPage extends CommonLib {
     @FindBy(css = "[aria-label='Meta logo']")
     private WebElement metaLogo;
 
-    public void clickSignUP() throws IOException {
+    public void clickSignUP() {
         createNewAccount.click();
     }
 

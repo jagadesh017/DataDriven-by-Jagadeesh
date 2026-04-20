@@ -10,6 +10,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Alert;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
@@ -274,8 +276,9 @@ public class CommonLib {
 
     public boolean acceptAlertWithWait(int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
             alert.accept();
             System.out.println("Alert accepted successfully after waiting");
             return true;
@@ -287,8 +290,9 @@ public class CommonLib {
 
     public boolean dismissAlertWithWait(int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
             alert.dismiss();
             System.out.println("Alert dismissed successfully after waiting");
             return true;
@@ -300,8 +304,9 @@ public class CommonLib {
 
     public String getAlertTextWithWait(int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
             String alertText = alert.getText();
             System.out.println("Alert text: " + alertText);
             return alertText;
@@ -335,7 +340,7 @@ public class CommonLib {
 
     public boolean waitForElementVisible(WebElement element, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.visibilityOf(element));
             System.out.println("Element is visible after waiting");
             return true;
@@ -347,7 +352,7 @@ public class CommonLib {
 
     public boolean waitForElementPresent(org.openqa.selenium.By locator, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.presenceOfElementLocated(locator));
             System.out.println("Element is present in DOM after waiting");
             return true;
@@ -359,7 +364,7 @@ public class CommonLib {
 
     public boolean waitForElementClickable(WebElement element, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.elementToBeClickable(element));
             System.out.println("Element is clickable after waiting");
             return true;
@@ -371,7 +376,7 @@ public class CommonLib {
 
     public boolean waitForElementInvisible(WebElement element, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.invisibilityOf(element));
             System.out.println("Element is invisible after waiting");
             return true;
@@ -383,7 +388,7 @@ public class CommonLib {
 
     public boolean waitForElementText(WebElement element, String text, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.textToBePresentInElement(element, text));
             System.out.println("Element text '" + text + "' found after waiting");
             return true;
@@ -395,7 +400,7 @@ public class CommonLib {
 
     public boolean waitForNumberOfElements(org.openqa.selenium.By locator, int count, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.numberOfElementsToBe(locator, count));
             System.out.println("Number of elements (" + count + ") found after waiting");
             return true;
@@ -407,7 +412,7 @@ public class CommonLib {
 
     public boolean waitForUrlContains(String urlPart, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.urlContains(urlPart));
             System.out.println("URL contains '" + urlPart + "' after waiting");
             return true;
@@ -419,7 +424,7 @@ public class CommonLib {
 
     public boolean waitForPageTitle(String titlePart, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.titleContains(titlePart));
             System.out.println("Page title contains '" + titlePart + "' after waiting");
             return true;
@@ -431,7 +436,7 @@ public class CommonLib {
 
     public boolean waitForElementSelected(WebElement element, int waitSeconds) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver,10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(waitSeconds > 0 ? waitSeconds : 10));
             wait.until(ExpectedConditions.elementSelectionStateToBe(element, true));
             System.out.println("Element is selected after waiting");
             return true;
@@ -444,7 +449,7 @@ public class CommonLib {
     public long getElementWaitTime(WebElement element, int maxWaitSeconds) {
         try {
             long startTime = System.currentTimeMillis();
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(maxWaitSeconds > 0 ? maxWaitSeconds : 10));
             wait.until(ExpectedConditions.visibilityOf(element));
             long endTime = System.currentTimeMillis();
             long waitTime = endTime - startTime;

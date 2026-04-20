@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 public class FacebookLoginPage extends CommonLib{
@@ -30,7 +31,7 @@ public class FacebookLoginPage extends CommonLib{
 
     public void enterUsername(String username)  {
         userName.sendKeys(username);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     public void enterPassword(String pass)  {
