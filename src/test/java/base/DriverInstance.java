@@ -48,8 +48,8 @@ public class DriverInstance implements DriverActions {
     @Override
     public void navigateTo() {
         //driver.get("https://www.google.com");
-        //driver.get("https://www.facebook.com");
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        driver.get("https://www.facebook.com");
+        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         //driver.get("https://datatables.net/");
        // driver.get("https://crex.com/");
         driver.manage().window().maximize();

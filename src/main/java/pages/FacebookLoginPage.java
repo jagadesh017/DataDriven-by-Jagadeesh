@@ -17,8 +17,8 @@ public class FacebookLoginPage extends CommonLib {
         PageFactory.initElements(driver, this);
     }
 
-    //locators
-    @FindBy(css = "#_R_1h6kqsqppb6amH1_")
+    //-----------------locators--------------
+    @FindBy(css = "#_R_oiqjbjb9pb6amH1_")
     private WebElement userName;
 
     @FindBy(css  = "input[type='password']")
@@ -27,7 +27,7 @@ public class FacebookLoginPage extends CommonLib {
     @FindBy(css = "div[aria-label='Log in']")
     private WebElement loginCTA;
 
-    //action methods
+    //----------------action methods--------------
 
     public void enterUsername(String username)  {
         userName.sendKeys(username);
@@ -38,7 +38,7 @@ public class FacebookLoginPage extends CommonLib {
         pwd.sendKeys(pass);
     }
 
-    public void clickSignin(){
+    public void clickSignIn(){
         loginCTA.click();
 
     }
