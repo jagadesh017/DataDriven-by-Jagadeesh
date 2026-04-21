@@ -69,25 +69,5 @@ public class FaceBookSignupPageTest extends DriverInstance {
         driver.navigate().to(url);
         // Listeners would be registered through the driver configuration, not at runtime
     }
-@Test
-    public void testDropdownValues(){
-
-        BasicCL b = new BasicCL(driver);
-        //b.selectDropdownValueslist();
-        //b.printHoverMenuValues();
-        //b.priceOfTheCourse();
-        // b.citiesAndTheirSum();
-         //b.getAlertMessage();
-         //b.switchWindowFromParentToChild();
-         //b.autoSuggestionCapture();
-        // b.iframe();
-         //b.checkDoller();
-        //b.openNewTab();
-        // b.getRohitScoreFromTheTable();
-        //b.checkRohitScoreFromTheTable();
-    b.getTable();
-    }
-
-
     }
 

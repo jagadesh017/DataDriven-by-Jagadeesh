@@ -1,14 +1,14 @@
 package pages;
 
+import common.CommonLib;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
-public class FacebookLoginPage extends CommonLib{
+public class FacebookLoginPage extends CommonLib {
     WebDriver driver;
 
     public FacebookLoginPage(WebDriver driver) {

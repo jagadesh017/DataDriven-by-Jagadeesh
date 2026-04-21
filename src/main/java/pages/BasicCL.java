@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Set;
 
+import common.CommonLib;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +18,7 @@ import org.testng.Assert;
      WebDriver driver;
 
      public BasicCL(WebDriver driver) {
+            super(driver);
          this.driver = driver;
          PageFactory.initElements(driver, this);
      }
@@ -37,47 +39,27 @@ import org.testng.Assert;
      private WebElement hoverButtonCTA;
 
 
-     public BasicCL selectDropdownValueslist() {
+     public BasicCL selectDropdownValuesList(int index ) {
          try {
-             Select select = new Select(dropdown);
-             List<WebElement> options = select.getOptions();
-             for (WebElement option : options) {
-                 System.out.println(option.getText());
-             }
-         } catch (Exception e) {
-             Assert.fail("failed select dropdown values");
+             selectDropdownByIndex(dropdown, index);
+             System.out.println("the dropdown values are selected" + index);
+             Thread.sleep(2000);
          }
-         return this;
-     }
-
-     public BasicCL mousehovermethod() {
-         try {
-             Actions action = new Actions(driver);
-             // action.moveToElement(hoverbutton).perform();
-             //WebElement hoverButton = driver.findElement(By.id("mousehover"));
-             action.moveToElement(hoverbuttonCTAVal).perform();
-
-             for (WebElement element : mousehoverList) {
-                 System.out.println(element.getText());
+        catch(Exception e){
+                 Assert.fail("failed to select dropdown value");
              }
-         } catch (Exception e) {
-             Assert.fail("failed mouse hover method");
+             return this;
          }
-         return this;
-     }
 
      public BasicCL printHoverMenuValues() {
          try {
-
-             Actions actions = new Actions(driver);
-             WebElement hoverButton = driver.findElement(By.id("mousehover"));
-             actions.moveToElement(hoverButton).perform();
-
+             mouseOver(hoverButtonCTA);
              List<WebElement> options = driver.findElements(By.cssSelector(".mouse-hover-content a"));
 
              for (WebElement option : options) {
                  System.out.println("Hover Option: " + option.getText());
              }
+             Thread.sleep(2000);
          } catch (Exception e) {
              Assert.fail("Could not retrieve hover menu values: " + e.getMessage());
          }
@@ -135,13 +117,8 @@ import org.testng.Assert;
      public BasicCL getAlertMessage() {
          try {
              alertConfirmCTA.click();
-             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-             wait.until(ExpectedConditions.alertIsPresent());
-             Alert a = driver.switchTo().alert();
-             String text = a.getText();
-             System.out.println("the alert message is " + text);
-
+             getAlertText();
+             dismissAlert();
          } catch (Exception e) {
              Assert.fail("failed to get allert message");
          }
@@ -251,60 +228,5 @@ import org.testng.Assert;
      return this;
      }
 
-     @FindBy(xpath = "//h3[@class='match-number']//span[contains(text(),'Wankhede Stadium, Mumbai')]")
-     private WebElement wankhedeStadium;
 
-     @FindBy(xpath = "/html/body/app-root/div/app-match-details/div[3]/div/app-match-scorecard/div/div[1]/div[2]/div[2]/div/app-scorecard-table/div/table")
-     private WebElement scoreTable;
-
-     @FindBy(xpath = "/html/body/app-root/div/app-match-details/div[3]/div/app-match-scorecard/div/div[1]/div[2]/div[2]/div/app-scorecard-table/div/table//tr")
-     private List<WebElement> scoreTableRows;
-
-     public BasicCL checkRohitScoreFromTheTable(){
-         try {
-             wankhedeStadium.click();
-             Thread.sleep(4000);
-             WebElement rohitRow = driver.findElement(By.xpath("/html/body/app-root/div/app-match-details/div[3]/div/app-match-scorecard/div/div[1]/div[2]/div[2]/div/app-scorecard-table/div/table//tr[2]"));
-
-             List<WebElement> cells = rohitRow.findElements(By.xpath("/html/body/app-root/div/app-match-details/div[3]/div/app-match-scorecard/div/div[1]/div[2]/div[2]/div/app-scorecard-table/div/table//tr[2]//td"));
-
-             System.out.println("Rohit Sharma Row Data:");
-             for (WebElement cell : cells) {
-                 String text = cell.getText().trim();
-                     System.out.print(text + " | ");
-             }
-
-         } catch (Exception e) {
-             Assert.fail("failed to get the score of rohit sharma in 1st IPL match");
-         }
-     return this;
-     }
-
-     @FindBy(css = "a[title='Table']")
-     private List<WebElement> table;
-
-     @FindBy(xpath = "//div[@class='points-table-wrapper']//table//tr")
-     private List<WebElement> tableRows;
-
-     @FindBy(xpath = "//div[@class='points-table-wrapper']//table//tr[2]//td")
-     private List<WebElement> tableCells;
-
-     public BasicCL getTable() {
-         try {
-             for (int i = 1; i < tableRows.size(); i++) {
-                     tableRows.get(i).findElement(By.tagName("td"));
-                     List<WebElement> cells = tableRows.get(i).findElements(By.tagName("td"));
-                         for (WebElement cell : cells) {
-                             StringBuilder stringBuilder = new StringBuilder();
-                             String text = cell.getText().trim();
-                             stringBuilder.append(text).append(" | ");
-                             System.out.print(stringBuilder.toString());
-                         }
-                         System.out.println();
-                     }
-         }catch (Exception e) {
-             Assert.fail("failed to print the table");
-         }
-         return this;
-     }
  }

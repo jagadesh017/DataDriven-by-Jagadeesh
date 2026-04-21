@@ -1,10 +1,8 @@
 package testcases;
 
 import base.DriverInstance;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.testng.Reporter;
-import pages.BasicPracticePage;
+import queries.BasicPracticePage;
 
 public class BasicTestClass extends DriverInstance {
 

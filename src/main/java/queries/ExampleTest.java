@@ -1,4 +1,4 @@
-package pages;
+package queries;
 
 import java.util.HashMap;
 import java.util.Map;

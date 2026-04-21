@@ -1,8 +1,0 @@
-2026-03-09 13:59:35.649 invenco-apc local0.debug init[496]: #47) Failed to parse value for procfs entry Name:
-2026-03-09 13:59:35.650 invenco-apc local0.err init[496]: #48) Failed to parse /proc/501/status
-2026-03-10 13:59:35.652 invenco-apc local0.info init[496]: #49) Failed to get status info for pid 501
-2026-03-10 13:59:35.654 invenco-apc local0.err init[496]: #50) Failed to open process stat file to retrieve info in column 1
-2026-03-10 13:59:35.654 invenco-apc local0.err init[496]: #51) Failed to open process stat file to retrieve info in column 14
-2026-03-11 13:59:35.655 invenco-apc local0.err init[496]: #52) Failed to open process stat file to retrieve info in column 15
-2026-03-11 13:59:35.656 invenco-apc local0.err init[496]: #53) Failed to open process stat file to retrieve info in column 22
-2026-03-11 13:59:35.657 invenco-apc local0.err init[496]: #54) Failed to open process stat file to retrieve info in column 2
