@@ -193,9 +193,12 @@ import org.testng.Assert;
      public BasicCL checkDoller() {
          try {
              iframe();
+             Thread.sleep(3000);
              driver.switchTo().frame(driver.findElement(By.id("courses-iframe")));
              Thread.sleep(2000);
-            dollerSymbol.click();
+             Actions act = new Actions(driver);
+                act.moveToElement(dollerSymbol).perform();
+             dollerSymbol.click();
              WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
                 wait.until(ExpectedConditions.visibilityOf(dollerSymbol));
                 System.out.println("the text in iframe is: " + dollerSymbol.getText());

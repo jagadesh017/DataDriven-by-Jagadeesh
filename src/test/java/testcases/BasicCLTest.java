@@ -7,19 +7,21 @@ import pages.BasicCL;
 public class BasicCLTest extends DriverInstance {
 
     @Test
-    public void testDropdownValues(){
+    public void testAllScenariosInSingleTest(){
 
         BasicCL basic = new BasicCL(driver);
      /*   basic.selectDropdownValuesList(3);
         basic.printHoverMenuValues();
         basic.priceOfTheCourse();
         basic.citiesAndTheirSum();
-        basic.getAlertMessage(); */
+        basic.getAlertMessage();
         basic.switchWindowFromParentToChild();
         basic.autoSuggestionCapture();
-        basic.iframe();
-        basic.checkDoller();
         basic.openNewTab();
+        basic.iframe(); */
+        basic.checkDoller();
+
+
 
     }
 }

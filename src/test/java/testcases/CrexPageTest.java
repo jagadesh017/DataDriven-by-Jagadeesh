@@ -1,10 +1,12 @@
 package testcases;
 
 import base.DriverInstance;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.CrexPage;
 
-public class CrexPageTest extends DriverInstance {
+@Listeners (listeners.TestNGListener.class)
+public class CrexPageTest extends DriverInstance{
 
 
     @Test

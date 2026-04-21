@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import utility.Utilities;
+import common.Utilities;
 
 import java.io.IOException;
 
@@ -27,11 +27,11 @@ public class DriverInstance implements DriverActions {
                     driver = new ChromeDriver();
                 }
             } else if (Utilities.fetchPropertyFile("browser").equals("firefox")) {
-
+                WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
             } else {
+                WebDriverManager.iedriver().setup();
                 driver = new InternetExplorerDriver();
-
             }
 
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class DriverInstance implements DriverActions {
     @AfterMethod
     @Override
     public void closeBrowser() {
-        //driver.quit();
+        driver.quit();
     }
 
     @BeforeMethod
@@ -49,9 +49,9 @@ public class DriverInstance implements DriverActions {
     public void navigateTo() {
         //driver.get("https://www.google.com");
         //driver.get("https://www.facebook.com");
-        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
         //driver.get("https://datatables.net/");
-        driver.get("https://crex.com/");
+       // driver.get("https://crex.com/");
         driver.manage().window().maximize();
     }
 }
