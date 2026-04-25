@@ -14,6 +14,7 @@ public class Utilities {
         Properties property = new Properties();
         property.load(file);
         property.get(key);
+
         return property.get(key);
 
     }

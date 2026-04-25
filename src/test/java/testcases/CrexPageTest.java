@@ -8,7 +8,6 @@ import pages.CrexPage;
 @Listeners (listeners.TestNGListener.class)
 public class CrexPageTest extends DriverInstance{
 
-
     @Test
     public void testTheIPL2026TableValues(){
         CrexPage crex = new CrexPage(driver);

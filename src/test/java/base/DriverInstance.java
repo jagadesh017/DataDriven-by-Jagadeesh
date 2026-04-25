@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import common.Utilities;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 public class DriverInstance implements DriverActions {
 
@@ -44,14 +45,37 @@ public class DriverInstance implements DriverActions {
         driver.quit();
     }
 
-    @BeforeMethod
-    @Override
-    public void navigateTo() {
-        //driver.get("https://www.google.com");
+//@BeforeMethod
+@Override
+public void navigateTo() throws IOException {
+    if(Utilities.fetchPropertyFile("google").equals("https://www.google.com")) {
+        driver.get("https://www.google.com");
+    } else if(Utilities.fetchPropertyFile("facebook").equals("https://www.facebook.com")) {
         driver.get("https://www.facebook.com");
-        //driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-        //driver.get("https://datatables.net/");
-       // driver.get("https://crex.com/");
-        driver.manage().window().maximize();
+    } else if(Utilities.fetchPropertyFile("practice").equals("https://rahulshettyacademy.com/AutomationPractice/")) {
+        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+    } else if(Utilities.fetchPropertyFile("datatables").equals("https://datatables.net/")) {
+        driver.get("https://datatables.net/");
+        } else if(Utilities.fetchPropertyFile("crex").equals("https://crex.com/")) {
+        driver.get("https://crex.com/");
     }
+    driver.manage().window().maximize();
+}
+
+    @BeforeMethod
+    public void navigateTo(Method method) throws IOException {
+        // This gets the name of the class where the @Test is located
+        String className = method.getDeclaringClass().getSimpleName();
+
+        // Fetch the URL from properties using the class name as the key
+        Object url = Utilities.fetchPropertyFile(className);
+
+        if (url != null) {
+            driver.get(url.toString());
+            driver.manage().window().maximize();
+        } else {
+            System.out.println("No URL found for class: " + className);
+        }
+    }
+
 }
