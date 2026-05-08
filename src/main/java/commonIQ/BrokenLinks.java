@@ -1,4 +1,4 @@
-package queries;
+package commonIQ;
 
 import common.CommonLib;
 import org.openqa.selenium.By;
@@ -13,16 +13,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-public class BasicPracticePage extends CommonLib {
+public class BrokenLinks extends CommonLib {
     public WebDriver driver;
 
-    public BasicPracticePage(WebDriver driver) {
+    public BrokenLinks(WebDriver driver) {
         super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    public BasicPracticePage validateBrokenLinks() {
+    public BrokenLinks validateBrokenLinks() {
         try {
             String title = driver.getTitle();
             String url = driver.getCurrentUrl();
@@ -34,7 +34,6 @@ public class BasicPracticePage extends CommonLib {
             System.out.println(links.size());
             for (WebElement link : links) {
                 String urls = link.getAttribute("href");
-                //code to validate the url
 
                 HttpsURLConnection httpURLConnection = (HttpsURLConnection) new URL(urls).openConnection();
                 httpURLConnection.connect();
@@ -46,9 +45,6 @@ public class BasicPracticePage extends CommonLib {
                     System.out.println("Valid link: " + urls + " - Response code: " + code);
                 }
             }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

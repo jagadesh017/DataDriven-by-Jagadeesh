@@ -2,7 +2,7 @@ package testcases;
 
 import base.DriverInstance;
 import org.testng.Reporter;
-import queries.BasicPracticePage;
+import commonIQ.BrokenLinks;
 
 public class BasicTestClass extends DriverInstance {
 
@@ -15,7 +15,7 @@ public class BasicTestClass extends DriverInstance {
 
         Reporter.log("Actual Result");
         Reporter.log("----------------------------");
-        BasicPracticePage page = new BasicPracticePage(driver);
+        BrokenLinks page = new BrokenLinks(driver);
        page.validateBrokenLinks();
     }
 }
